@@ -206,5 +206,8 @@ namespace GongSolutions.Wpf.DragDrop
     /// Gets the drag drop copy key state indicating the effect of the drag drop operation.
     /// </summary>
     public DragDropKeyStates DragDropCopyKeyState { get; private set; }
+
+
+    public Cursor StaticCursor { get; set; }
   }
 }
