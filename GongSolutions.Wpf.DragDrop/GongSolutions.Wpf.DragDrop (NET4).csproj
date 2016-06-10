@@ -62,6 +62,7 @@
     <Compile Include="DragAdorner.cs" />
     <Compile Include="DragDrop.cs" />
     <Compile Include="DragInfo.cs" />
+    <Compile Include="DraggingInfo.cs" />
     <Compile Include="DropTargetAdorner.cs" />
     <Compile Include="DropInfo.cs" />
     <Compile Include="DropTargetAdorners.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="Icons\IconFactory.cs" />
     <Compile Include="IDragInfo.cs" />
     <Compile Include="IDragSource.cs" />
+    <Compile Include="IDraggingInfo.cs" />
     <Compile Include="IDropInfo.cs" />
     <Compile Include="IDropTarget.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

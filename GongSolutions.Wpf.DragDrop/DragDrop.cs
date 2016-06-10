@@ -826,11 +826,19 @@ namespace GongSolutions.Wpf.DragDrop
 
     private static void DragSource_QueryContinueDrag(object sender, QueryContinueDragEventArgs e)
     {
-      if (e.Action == DragAction.Cancel || e.EscapePressed) {
-        DragAdorner = null;
-        EffectAdorner = null;
-        DropTargetAdorner = null;
-      }
+        if (e.Action == DragAction.Cancel || e.EscapePressed)
+        {
+            DragAdorner = null;
+            EffectAdorner = null;
+            DropTargetAdorner = null;
+        }
+        else
+        {
+            
+            var draggingInfo = new DraggingInfo(m_DragInfo, e.KeyStates == DragDropKeyStates.None);
+            var source = TryGetDragHandler(m_DragInfo, null);
+            source.Dragging(draggingInfo);
+        }
     }
 
     private static void DropTarget_PreviewDragEnter(object sender, DragEventArgs e)
