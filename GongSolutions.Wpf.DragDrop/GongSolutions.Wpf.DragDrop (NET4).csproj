@@ -101,7 +101,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="altua.gongwpfdragdrop.snk" />
-    <None Include="gong-wpf-dragdrop.pfx" />
+    <!-- <None Include="gong-wpf-dragdrop.pfx" /> -->
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
