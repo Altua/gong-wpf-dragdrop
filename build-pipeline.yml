@@ -1,10 +1,10 @@
 name: $(Build.SourceBranchName)-$(date:yyyyMMdd)$(rev:.r)
 
 trigger:
-- master
+- develop
 
 pr:
-- master
+- develop
 
 pool:
   vmImage: 'windows-latest'
