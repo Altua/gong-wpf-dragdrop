@@ -10,18 +10,17 @@ variables:
   PackageVersion: $[format('{0}.{1}.{2}', variables['Major'], variables['Minor'], variables['Revision'])]
 
 steps:
-- task: DownloadBuildArtifacts@0
+- task: DownloadPipelineArtifact@2
+  displayName: Download package artifacts
   inputs:
     buildType: 'specific'
-    project: 'Cloud'
-    pipeline: 'gong-wpf-dragdrop-CI'
+    project: 'a119dd29-1840-4811-bac7-d797f815186b'
+    definition: '77'
     specificBuildWithTriggering: false
-    buildVersionToDownload: 'latest'
-    allowPartiallySucceededBuilds: false 
-    branchName: 'refs/heads/master'
-    downloadType: 'single'
+    buildVersionToDownload: 'latestFromBranch'
+    branchName: 'refs/heads/develop'
     artifactName: 'gong-wpf-dragdrop'
-    downloadPath: '$(Build.ArtifactStagingDirectory)'
+    targetPath: '$(Pipeline.Workspace)'
 
 - task: NuGetCommand@2
   inputs:
@@ -29,7 +28,7 @@ steps:
     packagesToPack: 'GongSolutions.Wpf.DragDrop/GongSolutions.Wpf.DragDrop.nuspec'
     versioningScheme: 'byEnvVar'
     versionEnvVar: 'PackageVersion'
-    basePath: '$(Build.ArtifactStagingDirectory)/gong-wpf-dragdrop/GongSolutions.Wpf.DragDrop'
+    basePath: '$(Pipeline.Workspace)/gong-wpf-dragdrop/GongSolutions.Wpf.DragDrop'
     packDestination: '$(Build.ArtifactStagingDirectory)/package'
     
 - task: NuGetCommand@2
