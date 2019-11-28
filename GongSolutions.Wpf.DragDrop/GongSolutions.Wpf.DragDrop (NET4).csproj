@@ -38,7 +38,10 @@
     <Optimize>true</Optimize>
   </PropertyGroup>
   <PropertyGroup>
-    <SignAssembly>false</SignAssembly>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>altua.gongwpfdragdrop.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="PresentationCore">
@@ -97,6 +100,7 @@
     <Resource Include="Icons\EffectNone.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="altua.gongwpfdragdrop.snk" />
     <None Include="gong-wpf-dragdrop.pfx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
