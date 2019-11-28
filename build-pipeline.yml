@@ -34,23 +34,22 @@ steps:
     projects: '**/GongSolutions.Wpf.DragDrop (NET4).csproj'
     arguments: '--configuration $(buildConfiguration)'
 
-- task: CopyFiles@2
-  displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)'
-  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/develop'))
-  inputs:
-    Contents: |
-     **\*.nuspec
-     **\bin\Release\NET35\GongSolutions.Wpf.DragDrop.dll
-     **\bin\Release\NET35\GongSolutions.Wpf.DragDrop.xml
-     **\bin\Release\NET35\GongSolutions.Wpf.DragDrop.pdb
-     **\bin\Release\NET4\GongSolutions.Wpf.DragDrop.dll
-     **\bin\Release\NET4\GongSolutions.Wpf.DragDrop.xml
-     **\bin\Release\NET4\GongSolutions.Wpf.DragDrop.pdb
-    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+# - task: CopyFiles@2
+#   displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)'
+#   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/develop'))
+#   inputs:
+#     Contents: |
+#      **\*.nuspec
+#      **\bin\Release\NET35\GongSolutions.Wpf.DragDrop.dll
+#      **\bin\Release\NET35\GongSolutions.Wpf.DragDrop.xml
+#      **\bin\Release\NET35\GongSolutions.Wpf.DragDrop.pdb
+#      **\bin\Release\NET4\GongSolutions.Wpf.DragDrop.dll
+#      **\bin\Release\NET4\GongSolutions.Wpf.DragDrop.xml
+#      **\bin\Release\NET4\GongSolutions.Wpf.DragDrop.pdb
+#     TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
-- task: PublishBuildArtifacts@1
+- task: PublishPipelineArtifact@1
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/develop'))
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'gong-wpf-dragdrop'
-    publishLocation: 'Container'
+    targetPath: '$(Build.SourcesDirectory)\GongSolutions.Wpf.DragDrop'
+    artifact: 'gong-wpf-dragdrop'
