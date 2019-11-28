@@ -28,7 +28,7 @@ steps:
     packagesToPack: 'GongSolutions.Wpf.DragDrop/GongSolutions.Wpf.DragDrop.nuspec'
     versioningScheme: 'byEnvVar'
     versionEnvVar: 'PackageVersion'
-    basePath: '$(Pipeline.Workspace)/gong-wpf-dragdrop/GongSolutions.Wpf.DragDrop'
+    basePath: '$(Pipeline.Workspace)/GongSolutions.Wpf.DragDrop'
     packDestination: '$(Build.ArtifactStagingDirectory)/package'
     
 - task: NuGetCommand@2
