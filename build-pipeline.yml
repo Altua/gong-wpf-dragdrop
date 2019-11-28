@@ -19,17 +19,19 @@ steps:
 - task: NuGetToolInstaller@1
 
 - task: NuGetCommand@2
+  displayName: Restore
   inputs:
     restoreSolution: '$(solution)'
 
 - task: VSBuild@1
+  displayName: Build
   inputs:
     solution: '$(solution)'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
 - task: CopyFiles@2
-  displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)'
+  displayName: Copy Files ArtifactStagingDirectory
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/develop'))
   inputs:
     Contents: |
@@ -43,6 +45,7 @@ steps:
     TargetFolder: '$(Build.ArtifactStagingDirectory)/Packages'
 
 - task: PublishPipelineArtifact@1
+  displayName: Publish artifact
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/develop'))
   inputs:
     targetPath: '$(Build.ArtifactStagingDirectory)/Packages'
