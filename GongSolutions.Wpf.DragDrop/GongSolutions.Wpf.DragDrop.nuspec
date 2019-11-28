@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package>
     <metadata>
-        <id>gong-wpf-dragdrop</id>
+        <id>altua-gong-wpf-dragdrop</id>
         <version>1.0.0</version>
         <title>gong-wpf-dragdrop</title>
         <authors>Jan Karger (punker76), Steven Kirk, mitchell.jon</authors>
