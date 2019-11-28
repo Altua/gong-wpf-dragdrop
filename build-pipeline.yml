@@ -28,32 +28,9 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-- task: DotNetCoreCLI@2
-  displayName: Test
-  inputs:
-    command: 'test'
-    projects: '**/*Tests.csproj'
-    publishTestResults: true
-    arguments: '--configuration $(buildConfiguration) --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=$(Build.SourcesDirectory)\TestResults\ /p:Threshold=55'
-
-- task: reportgenerator@4
-  displayName: Report
-  inputs:
-    reports: '$(Build.SourcesDirectory)\TestResults\coverage.cobertura.xml'
-    targetdir: '$(Build.SourcesDirectory)\CodeCoverageReport'
-    reporttypes: 'HtmlInline_AzurePipelines;Cobertura'
-
-- task: PublishCodeCoverageResults@1
-  displayName: Publish Report
-  inputs:
-    codeCoverageTool: 'Cobertura'
-    summaryFileLocation: '$(Build.SourcesDirectory)\CodeCoverageReport\Cobertura.xml'
-    reportDirectory: '$(Build.SourcesDirectory)\CodeCoverageReport'
-    failIfCoverageEmpty: true
-
 - task: CopyFiles@2
   displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)'
-  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/develop'))
   inputs:
     Contents: |
      **\*.nuspec
@@ -63,11 +40,10 @@ steps:
      **\bin\Release\NET4\GongSolutions.Wpf.DragDrop.dll
      **\bin\Release\NET4\GongSolutions.Wpf.DragDrop.xml
      **\bin\Release\NET4\GongSolutions.Wpf.DragDrop.pdb
-    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)/Packages'
 
-- task: PublishBuildArtifacts@1
-  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+- task: PublishPipelineArtifact@1
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/develop'))
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'gong-wpf-dragdrop'
-    publishLocation: 'Container'
+    targetPath: '$(Build.ArtifactStagingDirectory)/Packages'
+    artifact: 'gong-wpf-dragdrop'
