@@ -22,34 +22,28 @@ steps:
   inputs:
     restoreSolution: '$(solution)'
 
-# - task: VSBuild@1
-#   inputs:
-#     solution: '$(solution)'
-#     platform: '$(buildPlatform)'
-#     configuration: '$(buildConfiguration)'
-
-- task: DotNetCoreCLI@2
+- task: VSBuild@1
   inputs:
-    command: 'build'
-    projects: '**/GongSolutions.Wpf.DragDrop (NET4).csproj'
-    arguments: '--configuration $(buildConfiguration)'
+    solution: '$(solution)'
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
 
-# - task: CopyFiles@2
-#   displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)'
-#   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/develop'))
-#   inputs:
-#     Contents: |
-#      **\*.nuspec
-#      **\bin\Release\NET35\GongSolutions.Wpf.DragDrop.dll
-#      **\bin\Release\NET35\GongSolutions.Wpf.DragDrop.xml
-#      **\bin\Release\NET35\GongSolutions.Wpf.DragDrop.pdb
-#      **\bin\Release\NET4\GongSolutions.Wpf.DragDrop.dll
-#      **\bin\Release\NET4\GongSolutions.Wpf.DragDrop.xml
-#      **\bin\Release\NET4\GongSolutions.Wpf.DragDrop.pdb
-#     TargetFolder: '$(Build.ArtifactStagingDirectory)'
+- task: CopyFiles@2
+  displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)'
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/develop'))
+  inputs:
+    Contents: |
+     **\*.nuspec
+     **\bin\Release\NET35\GongSolutions.Wpf.DragDrop.dll
+     **\bin\Release\NET35\GongSolutions.Wpf.DragDrop.xml
+     **\bin\Release\NET35\GongSolutions.Wpf.DragDrop.pdb
+     **\bin\Release\NET4\GongSolutions.Wpf.DragDrop.dll
+     **\bin\Release\NET4\GongSolutions.Wpf.DragDrop.xml
+     **\bin\Release\NET4\GongSolutions.Wpf.DragDrop.pdb
+    TargetFolder: '$(Build.ArtifactStagingDirectory)/Packages'
 
 - task: PublishPipelineArtifact@1
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/develop'))
   inputs:
-    targetPath: '$(Build.SourcesDirectory)\GongSolutions.Wpf.DragDrop'
+    targetPath: '$(Build.ArtifactStagingDirectory)/Packages'
     artifact: 'gong-wpf-dragdrop'
